@@ -13,6 +13,6 @@
   "author": "Jackson Tian",
   "license": "MIT",
   "dependencies": {
-    "wechat": "*"
+    "raw-body": "*"
   }
 }
