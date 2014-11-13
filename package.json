@@ -13,6 +13,22 @@
   "author": "Jackson Tian",
   "license": "MIT",
   "dependencies": {
+    "xml2js": "0.4.4",
+    "ejs": ">=1.0.0",
+    "wechat-crypto": "0.0.1",
     "raw-body": "*"
+  },
+  "devDependencies": {
+    "supertest": "*",
+    "mocha": "*",
+    "should": "~3.0.0",
+    "expect.js": "*",
+    "koa": "0.13.*",
+    "travis-cov": "*",
+    "coveralls": "*",
+    "mocha-lcov-reporter": "*",
+    "muk": "*",
+    "rewire": "*",
+    "istanbul": "*"
   }
 }
