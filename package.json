@@ -24,6 +24,7 @@
     "should": "~3.0.0",
     "expect.js": "*",
     "koa": "0.13.*",
+    "koa-generic-session": "*",
     "travis-cov": "*",
     "coveralls": "*",
     "mocha-lcov-reporter": "*",
