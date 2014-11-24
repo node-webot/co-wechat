@@ -30,6 +30,6 @@
     "mocha-lcov-reporter": "*",
     "muk": "*",
     "rewire": "*",
-    "istanbul": "*"
+    "istanbul-harmony": "*"
   }
 }
