@@ -163,9 +163,6 @@ app.use(wechat('some token').middleware(function *() {
 ## 详细API
 原始API文档请参见：[消息接口指南](http://mp.weixin.qq.com/wiki/index.php?title=消息接口指南)。
 
-## License
-The MIT license.
-
 ## 交流群
 QQ群：157964097，使用疑问，开发，贡献代码请加群。
 
@@ -175,3 +172,19 @@ QQ群：157964097，使用疑问，开发，贡献代码请加群。
 ![捐赠wechat](https://cloud.githubusercontent.com/assets/327019/2941591/2b9e5e58-d9a7-11e3-9e80-c25aba0a48a1.png)
 
 或者[![](http://img.shields.io/gratipay/JacksonTian.svg)](https://www.gittip.com/JacksonTian/)
+
+## License
+The MIT license.
+
+## Contributors
+
+```
+ project  : co-wechat
+ repo age : 4 months
+ active   : 9 days
+ commits  : 19
+ files    : 11
+ authors  :
+    13  Jackson Tian  68.4%
+     6  ifeiteng      31.6%
+```
