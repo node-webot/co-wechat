@@ -6,6 +6,10 @@
   "scripts": {
     "test": "make test-all"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/node-webot/co-wechat"
+  },
   "keywords": [
     "wechat",
     "wexin"
