@@ -2,7 +2,7 @@
   "name": "co-wechat",
   "version": "0.0.4",
   "description": "wechat api for co",
-  "main": "index.js",
+  "main": "lib/wechat.js",
   "scripts": {
     "test": "make test-all"
   },
@@ -27,13 +27,16 @@
     "mocha": "*",
     "should": "~3.0.0",
     "expect.js": "*",
-    "koa": "0.13.*",
+    "koa": "^1.0.0",
     "koa-generic-session": "*",
     "travis-cov": "*",
     "coveralls": "*",
     "mocha-lcov-reporter": "*",
     "muk": "*",
     "rewire": "*",
-    "istanbul-harmony": "*"
-  }
+    "istanbul": "*"
+  },
+  "files": [
+    "lib"
+  ]
 }
