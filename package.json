@@ -27,7 +27,7 @@
     "mocha": "*",
     "should": "~3.0.0",
     "expect.js": "*",
-    "koa": "^1.0.0",
+    "koa": "^2.0.0",
     "koa-generic-session": "*",
     "travis-cov": "*",
     "coveralls": "*",
