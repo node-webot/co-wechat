@@ -1,11 +1,43 @@
 co-wechat [![NPM version](https://badge.fury.io/js/co-wechat.png)](http://badge.fury.io/js/co-wechat) [![Build Status](https://travis-ci.org/node-webot/co-wechat.png?branch=master)](https://travis-ci.org/node-webot/co-wechat) [![Dependencies Status](https://david-dm.org/node-webot/co-wechat.png)](https://david-dm.org/node-webot/co-wechat) [![Coverage Status](https://coveralls.io/repos/node-webot/co-wechat/badge.png)](https://coveralls.io/r/node-webot/co-wechat)
 ======
 
-微信公众平台消息接口服务中间件与 API SDK
+微信公众平台消息接口服务中间件
+
+## 升级注意事项
+
+### 支持 Koa2
+
+如果仍然使用 Koa1，请使用co-wechat@1.x。
+
+### middleware 方法变更
+
+middleware() 方法接受一个 async function 作为参数。
+
+```
+app.use(wechat(config).middleware(async (message) => {
+  // TODO
+}));
+```
+
+### 上下文与返回值变更
+
+现在的上下文不再是原始的 请求上下文，而仅仅是 message 对象。
+
+业务的返回值现在直接返回即可，无需关注上下文。比如：
+
+```js
+async (message) => {
+  return 'Hello world!';
+}
+```
+
+### 取消 session 的支持
+
+不再支持 session 的功能。如需使用 session 功能，建议使用 redis 自行处理逻辑，取 message.FromUserName 作为 key，取一个合适的 ttl 时间即可。
 
 ## 功能列表
+
 - 自动回复（文本、图片、语音、视频、音乐、图文）
-- 会话支持（创新功能）
 
 ## Installation
 
@@ -184,12 +216,17 @@ The MIT license.
 ## Contributors
 
 ```
+
  project  : co-wechat
- repo age : 4 months
- active   : 9 days
- commits  : 19
- files    : 11
+ repo age : 2 years, 9 months
+ active   : 14 days
+ commits  : 41
+ files    : 10
  authors  :
-    13  Jackson Tian  68.4%
-     6  ifeiteng      31.6%
+    30  Jackson Tian  73.2%
+     6  ifeiteng      14.6%
+     3  lixiaojun     7.3%
+     1  Jealee3000    2.4%
+     1  fancyoung     2.4%
+
 ```
