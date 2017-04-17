@@ -13,7 +13,7 @@ co-wechat [![NPM version](https://badge.fury.io/js/co-wechat.png)](http://badge.
 
 middleware() 方法接受一个 async function 作为参数。
 
-```
+```js
 app.use(wechat(config).middleware(async (message) => {
   // TODO
 }));
