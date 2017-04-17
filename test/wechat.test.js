@@ -12,38 +12,36 @@ const wechat = require('../');
 
 var app = new Koa();
 
-app.use(wechat('some token').middleware(async (ctx) => {
-  // 微信输入信息都在this.weixin上
-  var info = ctx.weixin;
+app.use(wechat('some token').middleware(async (message) => {
   // 回复屌丝(普通回复)
-  if (info.FromUserName === 'diaosi') {
+  if (message.FromUserName === 'diaosi') {
     return 'hehe';
-  } else if (info.FromUserName === 'test') {
+  } else if (message.FromUserName === 'test') {
     return {
       content: 'text object',
       type: 'text'
     };
-  } else if (info.FromUserName === 'hehe') {
+  } else if (message.FromUserName === 'hehe') {
     return {
       title: '来段音乐吧<',
       description: '一无所有>',
       musicUrl: 'http://mp3.com/xx.mp3?a=b&c=d',
       hqMusicUrl: 'http://mp3.com/xx.mp3?foo=bar'
     };
-  } else if (info.FromUserName === 'cs') {
+  } else if (message.FromUserName === 'cs') {
     return {
       type: 'customerService'
     };
-  } else if (info.FromUserName === 'kf') {
+  } else if (message.FromUserName === 'kf') {
     return {
       type: 'customerService',
       kfAccount: 'test1@test'
     };
-  } else if (info.FromUserName === 'ls') {
-    return info.SendLocationInfo.EventKey;
-  } else if (info.FromUserName === 'pic_weixin') {
-    return info.SendPicsInfo.EventKey;
-  } else if (info.FromUserName === 'web') {
+  } else if (message.FromUserName === 'ls') {
+    return message.SendLocationInfo.EventKey;
+  } else if (message.FromUserName === 'pic_weixin') {
+    return message.SendPicsInfo.EventKey;
+  } else if (message.FromUserName === 'web') {
     return 'web message ok';
   }
     // 回复高富帅(图文回复)
@@ -55,7 +53,6 @@ app.use(wechat('some token').middleware(async (ctx) => {
       url: 'http://nodeapi.cloudfoundry.com/'
     }
   ];
-
 }));
 
 app = app.callback();
