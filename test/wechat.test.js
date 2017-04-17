@@ -15,45 +15,45 @@ app.use(wechat('some token').middleware(async (ctx) => {
   var info = ctx.weixin;
   // 回复屌丝(普通回复)
   if (info.FromUserName === 'diaosi') {
-    ctx.body = 'hehe';
+    return 'hehe';
   } else if (info.FromUserName === 'test') {
-    ctx.body = {
+    return {
       content: 'text object',
       type: 'text'
     };
   } else if (info.FromUserName === 'hehe') {
-    ctx.body = {
-      title: "来段音乐吧<",
-      description: "一无所有>",
-      musicUrl: "http://mp3.com/xx.mp3?a=b&c=d",
-      hqMusicUrl: "http://mp3.com/xx.mp3?foo=bar"
+    return {
+      title: '来段音乐吧<',
+      description: '一无所有>',
+      musicUrl: 'http://mp3.com/xx.mp3?a=b&c=d',
+      hqMusicUrl: 'http://mp3.com/xx.mp3?foo=bar'
     };
   } else if (info.FromUserName === 'cs') {
-    ctx.body = {
+    return {
       type: 'customerService'
     };
   } else if (info.FromUserName === 'kf') {
-    ctx.body = {
+    return {
       type: 'customerService',
       kfAccount: 'test1@test'
     };
   } else if (info.FromUserName === 'ls') {
-    ctx.body = info.SendLocationInfo.EventKey;
+    return info.SendLocationInfo.EventKey;
   } else if (info.FromUserName === 'pic_weixin') {
-    ctx.body = info.SendPicsInfo.EventKey;
+    return info.SendPicsInfo.EventKey;
   } else if (info.FromUserName === 'web') {
-    ctx.body = 'web message ok';
-  } else {
+    return 'web message ok';
+  } 
     // 回复高富帅(图文回复)
-    ctx.body = [
-      {
-        title: '你来我家接我吧',
-        description: '这是女神与高富帅之间的对话',
-        picurl: 'http://nodeapi.cloudfoundry.com/qrcode.jpg',
-        url: 'http://nodeapi.cloudfoundry.com/'
-      }
-    ];
-  }
+  return [
+    {
+      title: '你来我家接我吧',
+      description: '这是女神与高富帅之间的对话',
+      picurl: 'http://nodeapi.cloudfoundry.com/qrcode.jpg',
+      url: 'http://nodeapi.cloudfoundry.com/'
+    }
+  ];
+  
 }));
 
 app = app.callback();
@@ -147,7 +147,7 @@ describe('wechat.js', function () {
       .send(template(info))
       .expect(200)
       .end(function(err, res){
-        if (err) return done(err);
+        if (err) {return done(err);}
         var body = res.text.toString();
         body.should.include('<ToUserName><![CDATA[diaosi]]></ToUserName>');
         body.should.include('<FromUserName><![CDATA[nvshen]]></FromUserName>');
@@ -171,7 +171,7 @@ describe('wechat.js', function () {
       .send(template(info))
       .expect(200)
       .end(function(err, res){
-        if (err) return done(err);
+        if (err) {return done(err);}
         var body = res.text.toString();
         body.should.include('<ToUserName><![CDATA[test]]></ToUserName>');
         body.should.include('<FromUserName><![CDATA[nvshen]]></FromUserName>');
@@ -195,7 +195,7 @@ describe('wechat.js', function () {
       .send(template(info))
       .expect(200)
       .end(function(err, res){
-        if (err) return done(err);
+        if (err) {return done(err);}
         var body = res.text.toString();
         body.should.include('<ToUserName><![CDATA[gaofushuai]]></ToUserName>');
         body.should.include('<FromUserName><![CDATA[nvshen]]></FromUserName>');
@@ -223,7 +223,7 @@ describe('wechat.js', function () {
       .send(template(info))
       .expect(200)
       .end(function(err, res){
-        if (err) return done(err);
+        if (err) {return done(err);}
         var body = res.text.toString();
         body.should.include('<ToUserName><![CDATA[hehe]]></ToUserName>');
         body.should.include('<FromUserName><![CDATA[nvshen]]></FromUserName>');
@@ -257,7 +257,7 @@ describe('wechat.js', function () {
       .send(template(info))
       .expect(200)
       .end(function(err, res){
-        if (err) return done(err);
+        if (err) {return done(err);}
         var body = res.text.toString();
         body.should.include('<ToUserName><![CDATA[ls]]></ToUserName>');
         body.should.include('<FromUserName><![CDATA[nvshen]]></FromUserName>');
@@ -283,7 +283,7 @@ describe('wechat.js', function () {
       .send(template(info))
       .expect(200)
       .end(function(err, res){
-        if (err) return done(err);
+        if (err) {return done(err);}
         var body = res.text.toString();
         body.should.include('<ToUserName><![CDATA[pic_weixin]]></ToUserName>');
         body.should.include('<FromUserName><![CDATA[nvshen]]></FromUserName>');
@@ -307,7 +307,7 @@ describe('wechat.js', function () {
       .send(template(info))
       .expect(200)
       .end(function(err, res){
-        if (err) return done(err);
+        if (err) {return done(err);}
         var body = res.text.toString();
         body.should.include('<ToUserName><![CDATA[cs]]></ToUserName>');
         body.should.include('<FromUserName><![CDATA[gaofushuai]]></FromUserName>');
@@ -330,7 +330,7 @@ describe('wechat.js', function () {
       .send(template(info))
       .expect(200)
       .end(function(err, res) {
-        if (err) return done(err);
+        if (err) {return done(err);}
         var body = res.text.toString();
         body.should.include('<ToUserName><![CDATA[kf]]></ToUserName>');
         body.should.include('<FromUserName><![CDATA[zhong]]></FromUserName>');
@@ -354,7 +354,7 @@ describe('wechat.js', function () {
       .send(template(info))
       .expect(200)
       .end(function(err, res){
-        if (err) return done(err);
+        if (err) {return done(err);}
         var body = res.text.toString();
         body.should.include('<ToUserName><![CDATA[web]]></ToUserName>');
         body.should.include('<FromUserName><![CDATA[nvshen]]></FromUserName>');
@@ -378,7 +378,7 @@ describe('wechat.js', function () {
       .send(template(info))
       .expect(200)
       .end(function(err, res){
-        if (err) return done(err);
+        if (err) {return done(err);}
         var body = res.text.toString();
         body.should.include('<ToUserName><![CDATA[hehe]]></ToUserName>');
         body.should.include('<FromUserName><![CDATA[nvshen]]></FromUserName>');
@@ -412,7 +412,7 @@ describe('wechat.js', function () {
       .send(xml)
       .expect(200)
       .end(function(err, res){
-        if (err) return done(err);
+        if (err) {return done(err);}
       });
     });
   });

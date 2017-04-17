@@ -1,5 +1,8 @@
+'use strict';
+
 var querystring = require('querystring');
 
+/* eslint-disable indent */
 var tpl = [
   '<xml>',
     '<ToUserName><![CDATA[<%=sp%>]]></ToUserName>',
@@ -58,6 +61,7 @@ var tpl = [
     '<% } %>',
   '</xml>'
 ].join('');
+/* eslint-enable indent */
 
 exports.tail = function () {
   var q = {

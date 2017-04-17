@@ -17,24 +17,24 @@
   "author": "Jackson Tian",
   "license": "MIT",
   "dependencies": {
-    "xml2js": "0.4.4",
     "ejs": ">=1.0.0",
+    "raw-body": "^2.2.0",
     "wechat-crypto": "0.0.2",
-    "raw-body": "*"
+    "xml2js": "0.4.4"
   },
   "devDependencies": {
-    "supertest": "*",
-    "mocha": "*",
-    "should": "~3.0.0",
+    "coveralls": "*",
     "expect.js": "*",
     "koa": "^2.0.0",
     "koa-generic-session": "*",
-    "travis-cov": "*",
-    "coveralls": "*",
+    "mocha": "*",
     "mocha-lcov-reporter": "*",
     "muk": "*",
+    "nyc": "^10.2.0",
     "rewire": "*",
-    "istanbul": "*"
+    "should": "~3.0.0",
+    "supertest": "*",
+    "travis-cov": "*"
   },
   "files": [
     "lib"
