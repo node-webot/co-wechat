@@ -1,8 +1,17 @@
 {
   "rules": {
-    "indent": [2, 2],
-    "quotes": [2, "single"],
-    "linebreak-style": [2, "unix"],
+    "indent": [
+      2,
+      2
+    ],
+    "quotes": [
+      2,
+      "single"
+    ],
+    "linebreak-style": [
+      2,
+      "unix"
+    ],
     "semi": [2, "always"],
     "strict": [2, "global"],
     "curly": 2,
@@ -29,7 +38,8 @@
     "no-undef": 2,
     "callback-return": [2, ["callback", "cb", "next"]],
     "global-require": 0,
-    "no-console": 0
+    "no-console": 0,
+    "require-yield": 0
   },
   "env": {
     "es6": true,
@@ -41,6 +51,13 @@
     "it": true,
     "before": true,
     "after": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 8,
+    "sourceType": "script",
+    "ecmaFeatures": {
+      "jsx": true
+    }
   },
   "extends": "eslint:recommended"
 }
