@@ -1,3 +1,5 @@
+'use strict';
+
 require('should');
 
 const Koa = require('koa');
@@ -43,7 +45,7 @@ app.use(wechat('some token').middleware(async (ctx) => {
     return info.SendPicsInfo.EventKey;
   } else if (info.FromUserName === 'web') {
     return 'web message ok';
-  } 
+  }
     // 回复高富帅(图文回复)
   return [
     {
@@ -53,7 +55,7 @@ app.use(wechat('some token').middleware(async (ctx) => {
       url: 'http://nodeapi.cloudfoundry.com/'
     }
   ];
-  
+
 }));
 
 app = app.callback();
@@ -406,13 +408,16 @@ describe('wechat.js', function () {
       <Label><![CDATA[]]></Label>\
       <MsgId>5850440872586764820</MsgId>\
       </xml>';
-    it('should ok', function () {
+    it('should ok', function (done) {
       request(app)
       .post('/wechat' + tail())
       .send(xml)
       .expect(200)
       .end(function(err, res){
-        if (err) {return done(err);}
+        if (err) {
+          return done(err);
+        }
+        done();
       });
     });
   });
