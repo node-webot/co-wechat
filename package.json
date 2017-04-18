@@ -4,7 +4,7 @@
   "description": "wechat api for co",
   "main": "lib/wechat.js",
   "scripts": {
-    "test": "make test-all"
+    "test": "make test"
   },
   "repository": {
     "type": "git",
