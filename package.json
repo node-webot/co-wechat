@@ -1,6 +1,6 @@
 {
   "name": "co-wechat",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "description": "wechat api for co",
   "main": "lib/wechat.js",
   "scripts": {
