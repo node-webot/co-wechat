@@ -186,8 +186,44 @@ async (message) => {
 }
 ```
 
+## 集成到 Egg.js
+
+路由设置
+```js
+// app/router.js
+'use strict';
+
+module.exports = app => {
+  // 将 get/post 请求都转给 home.wechat
+  app.all('/', 'home.wechat');
+};
+```
+
+控制器
+
+```js
+'use strict';
+
+const wechat = require('co-wechat');
+
+module.exports = app => {
+  class HomeController extends app.Controller {}
+
+  // 因为 Egg 需要用类的形式来组织，而 wechat 是通过 middleware 方法来生成中间件
+  HomeController.prototype.wechat = wechat({
+    token: 'token',
+    appid: 'appid',
+    encodingAESKey: ''
+  }).middleware(async (message) => {
+    // TODO
+  });
+
+  return HomeController;
+};
+```
+
 ## Show cases
-### Node.js API自动回复
+### Node.js API 自动回复
 
 ![Node.js API自动回复机器人](http://nodeapi.diveintonode.org/assets/qrcode.jpg)
 
