@@ -14,7 +14,7 @@ co-wechat [![NPM version](https://badge.fury.io/js/co-wechat.png)](http://badge.
 middleware() 方法接受一个 async function 作为参数。
 
 ```js
-app.use(wechat(config).middleware(async (message) => {
+app.use(wechat(config).middleware(async (message, ctx) => {
   // TODO
 }));
 ```
@@ -26,7 +26,7 @@ app.use(wechat(config).middleware(async (message) => {
 业务的返回值现在直接返回即可，无需关注上下文。比如：
 
 ```js
-async (message) => {
+async (message, ctx) => {
   return 'Hello world!';
 }
 ```
@@ -50,7 +50,13 @@ $ npm install co-wechat
 ```js
 const wechat = require('co-wechat');
 
-app.use(wechat('some token').middleware(async (message) => {
+const config = {
+  token: 'THE TOKEN',
+  appid: 'THE APPID',
+  encodingAESKey: 'THE ENCODING AES KEY'  
+};
+
+app.use(wechat(config).middleware(async (message, ctx) => {
   // 微信输入信息就是这个 message
   if (message.FromUserName === 'diaosi') {
     // 回复屌丝(普通回复)
@@ -100,18 +106,18 @@ app.use(wechat('some token').middleware(async (message) => {
 
 #### 回复文本
 ```js
-async (message) => {
+async (message, ctx) => {
   return 'Hello world!';
 }
 // 或者
-async (message) => {
+async (message, ctx) => {
   return {type: "text", content: 'Hello world!'};
 }
 ```
 #### 回复图片
 
 ```js
-async (message) => {
+async (message, ctx) => {
   return {
     type: "image",
     content: {
@@ -123,7 +129,7 @@ async (message) => {
 #### 回复语音
 
 ```js
-async (message) => {
+async (message, ctx) => {
   return {
     type: "voice",
     content: {
@@ -134,7 +140,7 @@ async (message) => {
 ```
 #### 回复视频
 ```js
-async (message) => {
+async (message, ctx) => {
   return {
     type: "video",
     content: {
@@ -146,7 +152,7 @@ async (message) => {
 ```
 #### 回复音乐
 ```js
-async (message) => {
+async (message, ctx) => {
   return {
     title: "来段音乐吧",
     description: "一无所有",
@@ -157,7 +163,7 @@ async (message) => {
 ```
 #### 回复图文
 ```js
-async (message) => {
+async (message, ctx) => {
   return [
     {
       title: '你来我家接我吧',
@@ -171,14 +177,14 @@ async (message) => {
 
 #### 回复空串
 ```js
-async (message) => {
+async (message, ctx) => {
   return '';
 }
 ```
 
 #### 转发到客服接口
 ```js
-async (message) => {
+async (message, ctx) => {
   return {
     type: "customerService",
     kfAccount: "test1@test" //可选
@@ -214,7 +220,7 @@ module.exports = app => {
     token: 'token',
     appid: 'appid',
     encodingAESKey: ''
-  }).middleware(async (message) => {
+  }).middleware(async (message, ctx) => {
     // TODO
   });
 
@@ -254,15 +260,16 @@ The MIT license.
 ```
 
  project  : co-wechat
- repo age : 2 years, 9 months
- active   : 14 days
- commits  : 41
+ repo age : 3 years
+ active   : 20 days
+ commits  : 56
  files    : 10
- authors  :
-    30  Jackson Tian  73.2%
-     6  ifeiteng      14.6%
-     3  lixiaojun     7.3%
-     1  Jealee3000    2.4%
-     1  fancyoung     2.4%
+ authors  : 
+    43	Jackson Tian  76.8%
+     6	ifeiteng      10.7%
+     3	lixiaojun     5.4%
+     2	Andrew Lyu    3.6%
+     1	Jealee3000    1.8%
+     1	fancyoung     1.8%
 
 ```
