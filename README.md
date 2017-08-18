@@ -53,7 +53,7 @@ const wechat = require('co-wechat');
 const config = {
   token: 'THE TOKEN',
   appid: 'THE APPID',
-  encodingAESKey: 'THE ENCODING AES KEY'  
+  encodingAESKey: 'THE ENCODING AES KEY'
 };
 
 app.use(wechat(config).middleware(async (message, ctx) => {
@@ -228,6 +228,55 @@ module.exports = app => {
 };
 ```
 
+### 相同路由支持多账号
+
+```js
+// app/router.js
+'use strict';
+
+module.exports = app => {
+  // 将 get/post 请求都转给 home.wechat
+  app.all('/wechat/:appid', 'home.prehandle', 'home.wechat');
+};
+```
+
+在前置中间件中预先设置 ctx.wx_token 或 ctx.wx_cryptor：
+
+```js
+'use strict';
+
+const WXBizMsgCrypt = require('wechat-crypto');
+const wechat = require('co-wechat');
+
+module.exports = app => {
+  class HomeController extends app.Controller {
+    async prehandle(ctx, next) {
+      const appid = ctx.params.appid;
+      const token = getTokenByAppid(appid);
+      ctx.wx_token = token
+      // 或者
+      const encodingAESKey = getEncodingAESKeyByAppid(appid);
+
+      ctx.wx_cryptor = new WXBizMsgCrypt(token, encodingAESKey, appid);
+      await next();
+    }
+  }
+
+  HomeController.prototype.wechat = wechat({
+    // 当有前置中间件设置 ctx.wx_token 和 ctx.wx_cryptor 时，这里配置随意填写
+    // token: 'token',
+    // appid: 'appid',
+    // encodingAESKey: ''
+  }).middleware(async (message, ctx) => {
+    // TODO
+  });
+
+  return HomeController;
+};
+```
+
+> 注意，上述的 getTokenByAppid 和 getEncodingAESKeyByAppid 方法根据自己情况请自行提供。
+
 ## Show cases
 ### Node.js API 自动回复
 
@@ -260,16 +309,16 @@ The MIT license.
 ```
 
  project  : co-wechat
- repo age : 3 years
- active   : 20 days
- commits  : 56
+ repo age : 3 years, 1 month
+ active   : 21 days
+ commits  : 59
  files    : 10
- authors  : 
-    43	Jackson Tian  76.8%
-     6	ifeiteng      10.7%
-     3	lixiaojun     5.4%
-     2	Andrew Lyu    3.6%
-     1	Jealee3000    1.8%
-     1	fancyoung     1.8%
+ authors  :
+    46  Jackson Tian  78.0%
+     6  ifeiteng      10.2%
+     3  lixiaojun     5.1%
+     2  Andrew Lyu    3.4%
+     1  Jealee3000    1.7%
+     1  fancyoung     1.7%
 
 ```
