@@ -14,34 +14,34 @@ var app = new Koa();
 
 app.use(wechat('some token').middleware(async (message) => {
   // 回复屌丝(普通回复)
-  if (message.FromUserName === 'diaosi') {
+  if (message.Content === 'diaosi') {
     return 'hehe';
-  } else if (message.FromUserName === 'test') {
+  } else if (message.Content === 'test') {
     return {
       content: 'text object',
       type: 'text'
     };
-  } else if (message.FromUserName === 'hehe') {
+  } else if (message.Content === 'hehe') {
     return {
       title: '来段音乐吧<',
       description: '一无所有>',
       musicUrl: 'http://mp3.com/xx.mp3?a=b&c=d',
       hqMusicUrl: 'http://mp3.com/xx.mp3?foo=bar'
     };
-  } else if (message.FromUserName === 'cs') {
+  } else if (message.Content === 'cs') {
     return {
       type: 'customerService'
     };
-  } else if (message.FromUserName === 'kf') {
+  } else if (message.Content === 'kf') {
     return {
       type: 'customerService',
       kfAccount: 'test1@test'
     };
-  } else if (message.FromUserName === 'ls') {
+  } else if (message.Content === 'ls') {
     return message.SendLocationInfo.EventKey;
-  } else if (message.FromUserName === 'pic_weixin') {
+  } else if (message.Content === 'pic_weixin') {
     return message.SendPicsInfo.EventKey;
-  } else if (message.FromUserName === 'web') {
+  } else if (message.Content === 'web') {
     return 'web message ok';
   }
     // 回复高富帅(图文回复)
