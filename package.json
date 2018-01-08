@@ -26,13 +26,11 @@
     "coveralls": "*",
     "expect.js": "*",
     "koa": "^2.0.0",
-    "koa-generic-session": "*",
     "mocha": "*",
     "mocha-lcov-reporter": "*",
     "muk": "*",
     "nyc": "^10.2.0",
     "rewire": "*",
-    "should": "~3.0.0",
     "supertest": "*",
     "travis-cov": "*"
   },
