@@ -1,12 +1,12 @@
 'use strict';
 
-require('should');
+const querystring = require('querystring');
 
 const Koa = require('koa');
-const querystring = require('querystring');
+const expect = require('expect.js');
 const request = require('supertest');
-const template = require('./support').template;
-const tail = require('./support').tail;
+
+const { template, tail } = require('./support');
 
 const wechat = require('../');
 
@@ -148,11 +148,12 @@ describe('wechat.js', function () {
       .end(function(err, res){
         if (err) {return done(err);}
         var body = res.text.toString();
-        body.should.include('<ToUserName><![CDATA[diaosi]]></ToUserName>');
-        body.should.include('<FromUserName><![CDATA[nvshen]]></FromUserName>');
-        body.should.match(/<CreateTime>\d{13}<\/CreateTime>/);
-        body.should.include('<MsgType><![CDATA[text]]></MsgType>');
-        body.should.include('<Content><![CDATA[hehe]]></Content>');
+
+        expect(body).to.contain('<ToUserName><![CDATA[diaosi]]></ToUserName>');
+        expect(body).to.contain('<FromUserName><![CDATA[nvshen]]></FromUserName>');
+        expect(body).to.match(/<CreateTime>\d{13}<\/CreateTime>/);
+        expect(body).to.contain('<MsgType><![CDATA[text]]></MsgType>');
+        expect(body).to.contain('<Content><![CDATA[hehe]]></Content>');
         done();
       });
     });
@@ -172,11 +173,11 @@ describe('wechat.js', function () {
       .end(function(err, res){
         if (err) {return done(err);}
         var body = res.text.toString();
-        body.should.include('<ToUserName><![CDATA[test]]></ToUserName>');
-        body.should.include('<FromUserName><![CDATA[nvshen]]></FromUserName>');
-        body.should.match(/<CreateTime>\d{13}<\/CreateTime>/);
-        body.should.include('<MsgType><![CDATA[text]]></MsgType>');
-        body.should.include('<Content><![CDATA[text object]]></Content>');
+        expect(body).to.contain('<ToUserName><![CDATA[test]]></ToUserName>');
+        expect(body).to.contain('<FromUserName><![CDATA[nvshen]]></FromUserName>');
+        expect(body).to.match(/<CreateTime>\d{13}<\/CreateTime>/);
+        expect(body).to.contain('<MsgType><![CDATA[text]]></MsgType>');
+        expect(body).to.contain('<Content><![CDATA[text object]]></Content>');
         done();
       });
     });
@@ -196,15 +197,15 @@ describe('wechat.js', function () {
       .end(function(err, res){
         if (err) {return done(err);}
         var body = res.text.toString();
-        body.should.include('<ToUserName><![CDATA[gaofushuai]]></ToUserName>');
-        body.should.include('<FromUserName><![CDATA[nvshen]]></FromUserName>');
-        body.should.match(/<CreateTime>\d{13}<\/CreateTime>/);
-        body.should.include('<MsgType><![CDATA[news]]></MsgType>');
-        body.should.include('<ArticleCount>1</ArticleCount>');
-        body.should.include('<Title><![CDATA[你来我家接我吧]]></Title>');
-        body.should.include('<Description><![CDATA[这是女神与高富帅之间的对话]]></Description>');
-        body.should.include('<PicUrl><![CDATA[http://nodeapi.cloudfoundry.com/qrcode.jpg]]></PicUrl>');
-        body.should.include('<Url><![CDATA[http://nodeapi.cloudfoundry.com/]]></Url>');
+        expect(body).to.contain('<ToUserName><![CDATA[gaofushuai]]></ToUserName>');
+        expect(body).to.contain('<FromUserName><![CDATA[nvshen]]></FromUserName>');
+        expect(body).to.match(/<CreateTime>\d{13}<\/CreateTime>/);
+        expect(body).to.contain('<MsgType><![CDATA[news]]></MsgType>');
+        expect(body).to.contain('<ArticleCount>1</ArticleCount>');
+        expect(body).to.contain('<Title><![CDATA[你来我家接我吧]]></Title>');
+        expect(body).to.contain('<Description><![CDATA[这是女神与高富帅之间的对话]]></Description>');
+        expect(body).to.contain('<PicUrl><![CDATA[http://nodeapi.cloudfoundry.com/qrcode.jpg]]></PicUrl>');
+        expect(body).to.contain('<Url><![CDATA[http://nodeapi.cloudfoundry.com/]]></Url>');
         done();
       });
     });
@@ -224,16 +225,16 @@ describe('wechat.js', function () {
       .end(function(err, res){
         if (err) {return done(err);}
         var body = res.text.toString();
-        body.should.include('<ToUserName><![CDATA[hehe]]></ToUserName>');
-        body.should.include('<FromUserName><![CDATA[nvshen]]></FromUserName>');
-        body.should.match(/<CreateTime>\d{13}<\/CreateTime>/);
-        body.should.include('<MsgType><![CDATA[music]]></MsgType>');
-        body.should.include('<Music>');
-        body.should.include('</Music>');
-        body.should.include('<Title><![CDATA[来段音乐吧<]]></Title>');
-        body.should.include('<Description><![CDATA[一无所有>]]></Description>');
-        body.should.include('<MusicUrl><![CDATA[http://mp3.com/xx.mp3?a=b&c=d]]></MusicUrl>');
-        body.should.include('<HQMusicUrl><![CDATA[http://mp3.com/xx.mp3?foo=bar]]></HQMusicUrl>');
+        expect(body).to.contain('<ToUserName><![CDATA[hehe]]></ToUserName>');
+        expect(body).to.contain('<FromUserName><![CDATA[nvshen]]></FromUserName>');
+        expect(body).to.match(/<CreateTime>\d{13}<\/CreateTime>/);
+        expect(body).to.contain('<MsgType><![CDATA[music]]></MsgType>');
+        expect(body).to.contain('<Music>');
+        expect(body).to.contain('</Music>');
+        expect(body).to.contain('<Title><![CDATA[来段音乐吧<]]></Title>');
+        expect(body).to.contain('<Description><![CDATA[一无所有>]]></Description>');
+        expect(body).to.contain('<MusicUrl><![CDATA[http://mp3.com/xx.mp3?a=b&c=d]]></MusicUrl>');
+        expect(body).to.contain('<HQMusicUrl><![CDATA[http://mp3.com/xx.mp3?foo=bar]]></HQMusicUrl>');
         done();
       });
     });
@@ -258,11 +259,11 @@ describe('wechat.js', function () {
       .end(function(err, res){
         if (err) {return done(err);}
         var body = res.text.toString();
-        body.should.include('<ToUserName><![CDATA[ls]]></ToUserName>');
-        body.should.include('<FromUserName><![CDATA[nvshen]]></FromUserName>');
-        body.should.match(/<CreateTime>\d{13}<\/CreateTime>/);
-        body.should.include('<MsgType><![CDATA[text]]></MsgType>');
-        body.should.include('<Content><![CDATA[sendLocation]]></Content>');
+        expect(body).to.contain('<ToUserName><![CDATA[ls]]></ToUserName>');
+        expect(body).to.contain('<FromUserName><![CDATA[nvshen]]></FromUserName>');
+        expect(body).to.match(/<CreateTime>\d{13}<\/CreateTime>/);
+        expect(body).to.contain('<MsgType><![CDATA[text]]></MsgType>');
+        expect(body).to.contain('<Content><![CDATA[sendLocation]]></Content>');
         done();
       });
     });
@@ -284,11 +285,11 @@ describe('wechat.js', function () {
       .end(function(err, res){
         if (err) {return done(err);}
         var body = res.text.toString();
-        body.should.include('<ToUserName><![CDATA[pic_weixin]]></ToUserName>');
-        body.should.include('<FromUserName><![CDATA[nvshen]]></FromUserName>');
-        body.should.match(/<CreateTime>\d{13}<\/CreateTime>/);
-        body.should.include('<MsgType><![CDATA[text]]></MsgType>');
-        body.should.include('<Content><![CDATA[sendPic]]></Content>');
+        expect(body).to.contain('<ToUserName><![CDATA[pic_weixin]]></ToUserName>');
+        expect(body).to.contain('<FromUserName><![CDATA[nvshen]]></FromUserName>');
+        expect(body).to.match(/<CreateTime>\d{13}<\/CreateTime>/);
+        expect(body).to.contain('<MsgType><![CDATA[text]]></MsgType>');
+        expect(body).to.contain('<Content><![CDATA[sendPic]]></Content>');
         done();
       });
     });
@@ -308,10 +309,10 @@ describe('wechat.js', function () {
       .end(function(err, res){
         if (err) {return done(err);}
         var body = res.text.toString();
-        body.should.include('<ToUserName><![CDATA[cs]]></ToUserName>');
-        body.should.include('<FromUserName><![CDATA[gaofushuai]]></FromUserName>');
-        body.should.match(/<CreateTime>\d{13}<\/CreateTime>/);
-        body.should.include('<MsgType><![CDATA[transfer_customer_service]]></MsgType>');
+        expect(body).to.contain('<ToUserName><![CDATA[cs]]></ToUserName>');
+        expect(body).to.contain('<FromUserName><![CDATA[gaofushuai]]></FromUserName>');
+        expect(body).to.match(/<CreateTime>\d{13}<\/CreateTime>/);
+        expect(body).to.contain('<MsgType><![CDATA[transfer_customer_service]]></MsgType>');
         done();
       });
     });
@@ -331,11 +332,11 @@ describe('wechat.js', function () {
       .end(function(err, res) {
         if (err) {return done(err);}
         var body = res.text.toString();
-        body.should.include('<ToUserName><![CDATA[kf]]></ToUserName>');
-        body.should.include('<FromUserName><![CDATA[zhong]]></FromUserName>');
-        body.should.match(/<CreateTime>\d{13}<\/CreateTime>/);
-        body.should.include('<MsgType><![CDATA[transfer_customer_service]]></MsgType>');
-        body.should.include('<KfAccount><![CDATA[test1@test]]></KfAccount>');
+        expect(body).to.contain('<ToUserName><![CDATA[kf]]></ToUserName>');
+        expect(body).to.contain('<FromUserName><![CDATA[zhong]]></FromUserName>');
+        expect(body).to.match(/<CreateTime>\d{13}<\/CreateTime>/);
+        expect(body).to.contain('<MsgType><![CDATA[transfer_customer_service]]></MsgType>');
+        expect(body).to.contain('<KfAccount><![CDATA[test1@test]]></KfAccount>');
         done();
       });
     });
@@ -355,11 +356,11 @@ describe('wechat.js', function () {
       .end(function(err, res){
         if (err) {return done(err);}
         var body = res.text.toString();
-        body.should.include('<ToUserName><![CDATA[web]]></ToUserName>');
-        body.should.include('<FromUserName><![CDATA[nvshen]]></FromUserName>');
-        body.should.match(/<CreateTime>\d{13}<\/CreateTime>/);
-        body.should.include('<MsgType><![CDATA[text]]></MsgType>');
-        body.should.include('<Content><![CDATA[web message ok]]></Content>');
+        expect(body).to.contain('<ToUserName><![CDATA[web]]></ToUserName>');
+        expect(body).to.contain('<FromUserName><![CDATA[nvshen]]></FromUserName>');
+        expect(body).to.match(/<CreateTime>\d{13}<\/CreateTime>/);
+        expect(body).to.contain('<MsgType><![CDATA[text]]></MsgType>');
+        expect(body).to.contain('<Content><![CDATA[web message ok]]></Content>');
         done();
       });
     });
@@ -379,16 +380,16 @@ describe('wechat.js', function () {
       .end(function(err, res){
         if (err) {return done(err);}
         var body = res.text.toString();
-        body.should.include('<ToUserName><![CDATA[hehe]]></ToUserName>');
-        body.should.include('<FromUserName><![CDATA[nvshen]]></FromUserName>');
-        body.should.match(/<CreateTime>\d{13}<\/CreateTime>/);
-        body.should.include('<MsgType><![CDATA[music]]></MsgType>');
-        body.should.include('<Music>');
-        body.should.include('</Music>');
-        body.should.include('<Title><![CDATA[来段音乐吧<]]></Title>');
-        body.should.include('<Description><![CDATA[一无所有>]]></Description>');
-        body.should.include('<MusicUrl><![CDATA[http://mp3.com/xx.mp3?a=b&c=d]]></MusicUrl>');
-        body.should.include('<HQMusicUrl><![CDATA[http://mp3.com/xx.mp3?foo=bar]]></HQMusicUrl>');
+        expect(body).to.contain('<ToUserName><![CDATA[hehe]]></ToUserName>');
+        expect(body).to.contain('<FromUserName><![CDATA[nvshen]]></FromUserName>');
+        expect(body).to.match(/<CreateTime>\d{13}<\/CreateTime>/);
+        expect(body).to.contain('<MsgType><![CDATA[music]]></MsgType>');
+        expect(body).to.contain('<Music>');
+        expect(body).to.contain('</Music>');
+        expect(body).to.contain('<Title><![CDATA[来段音乐吧<]]></Title>');
+        expect(body).to.contain('<Description><![CDATA[一无所有>]]></Description>');
+        expect(body).to.contain('<MusicUrl><![CDATA[http://mp3.com/xx.mp3?a=b&c=d]]></MusicUrl>');
+        expect(body).to.contain('<HQMusicUrl><![CDATA[http://mp3.com/xx.mp3?foo=bar]]></HQMusicUrl>');
         done();
       });
     });
