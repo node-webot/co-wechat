@@ -69,7 +69,7 @@ describe('wechat.js', function () {
 
     it('should 200', function (done) {
       var q = {
-        timestamp: new Date().getTime(),
+        timestamp: Date.now(),
         nonce: parseInt((Math.random() * 10e10), 10)
       };
       var s = ['some token', q.timestamp, q.nonce].sort().join('');
@@ -83,7 +83,7 @@ describe('wechat.js', function () {
 
     it('should 401 invalid signature', function (done) {
       var q = {
-        timestamp: new Date().getTime(),
+        timestamp: Date.now(),
         nonce: parseInt((Math.random() * 10e10), 10)
       };
       q.signature = 'invalid_signature';
@@ -105,7 +105,7 @@ describe('wechat.js', function () {
 
     it('should 401 invalid signature', function (done) {
       var q = {
-        timestamp: new Date().getTime(),
+        timestamp: Date.now(),
         nonce: parseInt((Math.random() * 10e10), 10)
       };
       q.signature = 'invalid_signature';
@@ -120,7 +120,7 @@ describe('wechat.js', function () {
   describe('valid other method', function () {
     it('should 200', function (done) {
       var q = {
-        timestamp: new Date().getTime(),
+        timestamp: Date.now(),
         nonce: parseInt((Math.random() * 10e10), 10)
       };
       var s = ['some token', q.timestamp, q.nonce].sort().join('');
