@@ -100,6 +100,14 @@ app.use(wechat(config).middleware(async (message, ctx) => {
 
 > 备注：token 在微信平台的开发者中心申请
 
+## 开启调试模式（用于[微信公众平台接口调试工具](https://mp.weixin.qq.com/debug/cgi-bin/apiinfo)调试)
+```js
+//构造函数的第二个函数isDebug参数，为true或别的正值时表示开启，推荐用配置或是环境变量的方式传参
+wechat(config, true)
+```
+
+配置成debug模式后，用微信公众平台接口调试工具发送POST请求(比如消息接口调试-文本消息)时返回结果不会提示Invalid signature
+
 ### 回复消息
 
 当用户发送消息到微信公众账号，自动回复一条消息。这条消息可以是文本、图片、语音、视频、音乐、图文。详见：[官方文档](http://mp.weixin.qq.com/wiki/index.php?title=发送被动响应消息)
