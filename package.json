@@ -1,5 +1,5 @@
 {
-  "name": "co-wechat",
+  "name": "lyman-co-wechat",
   "version": "2.3.0",
   "description": "wechat api for co",
   "main": "lib/wechat.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/node-webot/co-wechat"
+    "url": "https://github.com/lymanlai/co-wechat"
   },
   "keywords": [
     "wechat",
